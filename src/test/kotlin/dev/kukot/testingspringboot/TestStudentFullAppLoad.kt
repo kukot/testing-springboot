@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
@@ -16,14 +17,14 @@ internal class TestStudentFullAppLoad {
 
     @BeforeEach
     fun setup() {
-        Mockito.`when`(studentRepository.findAllStudent()).thenReturn(
+        Mockito.`when`(studentRepository.findAll()).thenReturn(
             listOf(
                 Student(id = 1, name = "Kevin", age = 25),
                 Student(id = 2, name = "Peter", age = 28),
                 Student(id = 3, name = "Nathan", age = 27)
             )
         )
-        Mockito.`when`(studentService.getById(1)).thenReturn(Student(1, "Kevin", 25))
+        Mockito.`when`(studentService.getById(1)).thenReturn(Optional.of(Student(1, "Kevin", 25)))
     }
 
     @MockBean
